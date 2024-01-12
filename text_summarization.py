@@ -28,7 +28,7 @@ from langchain.chat_models import ChatOpenAI
 import pandas as pd
 import json
 warnings.filterwarnings('ignore')
-os.environ['OPENAI_API_KEY'] = 'xx-xxxx'
+os.environ['OPENAI_API_KEY'] = 'xxxxxx'
 key = os.environ.get('OPENAI_API_KEY')
 
 
@@ -68,6 +68,7 @@ class TextSummarisation(OpenAIObject):
              %INSTRUCTIONS:
              please summarize the following piece of text.
              respond in a manner that a 5 years old can understand.
+             respond in at leat 5 to 6 sentences.
              
              %TEXT:
              {text}
@@ -197,8 +198,10 @@ class DocumentQA(OpenAIObject):
         try:
             template = '''
               %INSTRUCTIONS:
-              Answer the following question only based on the document content, also if any persons name or service name occurs,
-              first search the name in the document and then provide the answer with respect to document content
+              Answer the following question only based on the document content.
+              also if any persons name or service name occurs,first search the name in the document and then provide the answer with respect to document content.
+              check if the prompt is related to the document.
+              if any given text from the prompt is not recognized, or not found in the document simply reply as "sorry!!, may be the thing you are looking for is not found in the document.
           
               %TEXT:
               {text}
